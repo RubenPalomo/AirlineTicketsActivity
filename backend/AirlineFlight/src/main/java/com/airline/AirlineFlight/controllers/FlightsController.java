@@ -1,4 +1,4 @@
-package com.quokka.AirlineFlight.controllers;
+package com.airline.AirlineFlight.controllers;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quokka.AirlineFlight.models.Flight;
-import com.quokka.AirlineFlight.service.FlightService;
+import com.airline.AirlineFlight.models.Flight;
+import com.airline.AirlineFlight.service.FlightService;
 
 @RestController
 @RequestMapping("/api/flight")

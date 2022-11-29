@@ -1,8 +1,8 @@
-package com.quokka.AirlineFlight.repositories;
+package com.airline.AirlineFlight.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.quokka.AirlineFlight.models.Flight;
+import com.airline.AirlineFlight.models.Flight;
 
 public interface FlightsRepository extends MongoRepository<Flight, String> {
 }

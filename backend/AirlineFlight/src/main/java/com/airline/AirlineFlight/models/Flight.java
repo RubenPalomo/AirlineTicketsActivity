@@ -1,4 +1,4 @@
-package com.quokka.AirlineFlight.models;
+package com.airline.AirlineFlight.models;
 
 import java.util.Date;
 

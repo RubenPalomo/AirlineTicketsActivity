@@ -1,4 +1,4 @@
-package com.quokka.QuokkaAirline.service;
+package com.airline.AirlineUser.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.quokka.QuokkaAirline.models.User;
-import com.quokka.QuokkaAirline.repositories.UserRepository;
+import com.airline.AirlineUser.models.User;
+import com.airline.AirlineUser.repositories.UserRepository;
 
 @Component
 public class UserService {

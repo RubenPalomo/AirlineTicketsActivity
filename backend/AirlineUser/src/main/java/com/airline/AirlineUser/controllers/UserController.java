@@ -1,4 +1,4 @@
-package com.quokka.QuokkaAirline.controllers;
+package com.airline.AirlineUser.controllers;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quokka.QuokkaAirline.models.User;
-import com.quokka.QuokkaAirline.service.UserService;
+import com.airline.AirlineUser.models.User;
+import com.airline.AirlineUser.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
