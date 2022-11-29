@@ -1,0 +1,23 @@
+.containerUserTable {
+  margin-top: 10vh;
+  margin-left: 35%;
+}
+
+.table {
+  width: 40%;
+  border-spacing: 5vh 5vw;
+  border-style: solid;
+  border-collapse: separate;
+  border-radius: 15px;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(70, 252, 241, 1) 200%
+  );
+  text-align: center;
+}
+
+.element {
+  background-color: bisque;
+}

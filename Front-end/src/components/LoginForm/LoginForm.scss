@@ -1,0 +1,19 @@
+.mainForm {
+  align-items: center;
+  justify-content: center;
+}
+
+.submitBtn {
+  background-color: blue;
+  color: white;
+  width: 100%;
+  margin-left: -0.1vw;
+}
+
+input {
+  text-indent: 5px;
+}
+
+.invalid {
+  color: red;
+}

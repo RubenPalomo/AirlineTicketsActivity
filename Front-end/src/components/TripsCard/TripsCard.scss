@@ -1,0 +1,20 @@
+.tripContainer {
+  margin-top: 1vh;
+  margin-left: 20%;
+}
+
+.tripTable {
+  width: 60%;
+  border-spacing: 1vh 1vw;
+  border-style: solid;
+  border-collapse: separate;
+  border-radius: 15px;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 50%,
+    rgb(215, 255, 255) 200%
+  );
+  text-align: center;
+  margin-bottom: 2vh;
+}
