@@ -16,7 +16,7 @@ import com.airline.AirlineFlight.models.Flight;
 import com.airline.AirlineFlight.service.FlightService;
 
 @RestController
-@RequestMapping("/api/flight")
+@RequestMapping("/flight")
 public class FlightsController {
     @Autowired
     private FlightService flightService;

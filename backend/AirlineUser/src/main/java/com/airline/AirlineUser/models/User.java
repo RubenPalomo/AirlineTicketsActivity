@@ -19,10 +19,10 @@ public class User {
     }
 
     public User(String document, String firstName, String lastName, int age) {
-        this.document = document;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+        setDocument(document);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setAge(age);
     }
 
     public String getDocument() {
@@ -59,7 +59,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [document=" + document + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
-                + "]";
+        return "{document:" + document + ", firstName:" + firstName + ", lastName:" + lastName + ", age:" + age
+                + "}";
     }
 }

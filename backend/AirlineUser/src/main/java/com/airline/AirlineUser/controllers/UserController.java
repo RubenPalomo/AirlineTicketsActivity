@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.airline.AirlineUser.models.HttpResponse;
 import com.airline.AirlineUser.models.User;
 import com.airline.AirlineUser.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -32,8 +33,16 @@ public class UserController {
     }
 
     @PostMapping()
-    public void save(@RequestBody User user) {
-        userService.save(user);
+    public HttpResponse save(@RequestBody User user) {
+        try {
+            findbyId(user.getDocument());
+            return new HttpResponse("", "User already exists", false);
+        } catch (Exception e) {
+            // TODO: handle exception
+            userService.save(user);
+            return new HttpResponse("", "User correclty created", true);
+        }
+
     }
 
     @PutMapping("/{id}")

@@ -2,40 +2,69 @@ package com.airline.AirlineFlight.models;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document("flight")
+@Document("flights")
 public class Flight {
-    protected String name;
-    protected String airline;
-    protected Date departure;
-    protected int transiteMinutes;
-    protected int layovers;
-    protected int luggagesPrice;
-    protected int price;
+    @Id
+    private String flightId;
+    @Field
+    private String start;
+    @Field
+    private String destination;
+    @Field
+    private String airline;
+    @Field
+    private Date departure;
+    @Field
+    private int transiteMinutes;
+    @Field
+    private int layovers;
+    @Field
+    private int luggagesPrice;
+    @Field
+    private int price;
 
     public Flight() {
 
     }
 
-    public Flight(String name, String airline, Date departure, int transiteMinutes, int layovers,
+    public Flight(String flightId, String airline, Date departure, int transiteMinutes, int layovers,
             int luggagesPrice,
             int price) {
-        this.name = name;
-        this.airline = airline;
-        this.departure = departure;
-        this.transiteMinutes = transiteMinutes;
-        this.layovers = layovers;
-        this.luggagesPrice = luggagesPrice;
-        this.price = price;
+        setFlightId(flightId);
+        setAirline(airline);
+        setDeparture(departure);
+        setTransiteMinutes(transiteMinutes);
+        setLayovers(layovers);
+        setLuggagesPrice(luggagesPrice);
+        setPrice(price);
     }
 
-    public String getName() {
-        return name;
+    public String getFlightId() {
+        return flightId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public String getAirline() {
@@ -84,6 +113,13 @@ public class Flight {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight [flightId=" + flightId + ", start=" + start + ", destination=" + destination + ", airline="
+                + airline + ", departure=" + departure + ", transiteMinutes=" + transiteMinutes + ", layovers="
+                + layovers + ", luggagesPrice=" + luggagesPrice + ", price=" + price + "]";
     }
 
 }
