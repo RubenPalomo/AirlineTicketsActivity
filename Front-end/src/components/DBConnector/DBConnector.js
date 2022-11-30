@@ -4,7 +4,8 @@ function DBConnector(URL) {
   axios
     .get(URL)
     .then((response) => {
-      if (response == null) return;
+      console.log(response);
+      return response;
     })
     .catch((e) => {
       return e;

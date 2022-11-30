@@ -1,7 +1,5 @@
-import Login from "./pages/Login/Login";
-import Header from "./components/Header/Header";
 import Body from "./pages/Routes";
-import { useState } from "react";
+import DBConnector from "./components/DBConnector/DBConnector";
 
 function App() {
   return (
