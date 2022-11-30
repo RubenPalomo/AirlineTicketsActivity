@@ -1,51 +1,86 @@
 import React, { useState } from "react";
 import "./BuyForm.scss";
+import "./../../pages/BuyTickets/BuyTickets";
+import BuyTickets from "./../../pages/BuyTickets/BuyTickets";
 
-function BuyForm() {
-  const getDay = () => {
-    const date = new Date(Date.now()).toLocaleDateString();
-    let infoDate = date.split(" ");
-    infoDate = infoDate[0].replaceAll("/", "-");
-
-    return infoDate.substring(6) + "-" + infoDate.substring(0, 5);
+function BuyForm(props) {
+  const formatDate = (date) => {
+    let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
+    let mo = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(date);
+    let da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
+    return `${ye}-${mo}-${da}`;
   };
-  const [newValue, setValue] = getDay();
 
-  const we = () => console.log("we");
+  const getDay = () => {
+    return new Date(Date.now());
+  };
+  const [newValue, setValue] = useState(formatDate(getDay()));
+  const search = props.setSearchParams;
 
   return (
-    <div className="container">
+    <div>
       <div className="form">
-        <label for="company">I want to travel with </label>
-        <select name="company" id="company">
+        <label for="company">I want to travel from </label>
+        <input
+          type="text"
+          id="from"
+          name="from"
+          onChange={(e) => {
+            search("from", e.target.value);
+          }}
+        />
+        <label for="to"> to </label>
+        <input
+          type="text"
+          id="to"
+          name="to"
+          onChange={(e) => {
+            search("to", e.target.value);
+          }}
+        />
+        <label for="company"> with </label>
+        <select
+          name="company"
+          id="company"
+          onChange={(e) => {
+            search("company", e.target.value);
+          }}
+        >
+          <option value="">Select</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="mercedes">Mercedes</option>
           <option value="audi">Audi</option>
         </select>
         <label for="scales"> company, making </label>
-        <select name="scales" id="scales">
+        <select
+          name="scales"
+          id="scales"
+          onChange={(e) => {
+            search("scales", e.target.value);
+          }}
+        >
+          <option value="">Select</option>
           <option value="zero">None</option>
-          <option value="one">Only one</option>
-          <option value="no-matter">Two or more</option>
+          <option value="one">One or less</option>
+          <option value="no-matter">I don't matter</option>
         </select>
-        <label for="luggage"> scales. I will travel with </label>
-        <select name="luggage" id="luggage">
-          <option value="no-luggage">None</option>
-          <option value="luggage">Some</option>
-        </select>
-        <label for="luggage"> luggage the day: </label>
-        {/* <input
+        <label for="start"> scales. I will travel the day: </label>
+        <input
           type="date"
           id="start"
           name="trip-start"
-          value={getDay()}
+          value={newValue}
           min="2022-01-01"
           max="2024-12-31"
-          onChange={(newValue) => {
-            setValue(newValue);
+          onChange={(e) => {
+            const newDate = new Date(e.target.value);
+            if (newDate >= getDay()) {
+              setValue(formatDate(newDate));
+              search("date", newDate);
+            }
           }}
-        /> */}
+        />
       </div>
     </div>
   );

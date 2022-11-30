@@ -38,6 +38,7 @@ function Body() {
 
     return routes;
   };
+
   return (
     <BrowserRouter>
       <App />

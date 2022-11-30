@@ -6,9 +6,9 @@ import "./MyTrips.scss";
 
 function Home() {
   const trips = [
-    new TripObj("Italy", "11/31/2022", "Airbus", 0, false, 1000),
-    new TripObj("Spain", "12/15/2022", "Aeronapo", 1, true, 1000),
-    new TripObj("Murcia", "12/29/2022", "Tranvia", 1, true, 20),
+    new TripObj("Madrid", "Rome", "11/31/2022", "Airbus", 0, false, 1000),
+    new TripObj("Rome", "Madrid", "12/15/2022", "Aeronapo", 1, true, 1000),
+    new TripObj("Madrid", "Murcia", "12/29/2022", "Tranvia", 1, true, 20),
   ];
   return (
     <div>
@@ -18,6 +18,7 @@ function Home() {
         {trips.map((element, index) => (
           <TripsCard
             key={index}
+            origin={element.origin}
             destination={element.destination}
             date={element.date}
             company={element.company}

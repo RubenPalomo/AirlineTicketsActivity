@@ -1,5 +1,6 @@
 class Trip {
-  constructor(destination, date, company, scales, luggage, price) {
+  constructor(origin, destination, date, company, scales, luggage, price) {
+    this.origin = origin;
     this.destination = destination;
     this.date = date;
     this.company = company;

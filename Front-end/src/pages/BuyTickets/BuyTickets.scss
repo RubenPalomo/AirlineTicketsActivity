@@ -1,5 +1,31 @@
+.buyTicketsContainer {
+  background: linear-gradient(
+    0deg,
+    rgb(255, 255, 255) 0%,
+    rgb(201, 253, 255) 100%
+  );
+  background-image: url("./../../assets/earth.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 40%;
+  height: 100vh;
+}
+
+.scrollTickets {
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 80%;
+  height: 40vh;
+  margin: auto;
+  margin-top: 5vh;
+  border: 1px solid black;
+}
+
 .img {
   position: absolute;
-  top: 50vh;
+  top: 58vh;
   left: 10%;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
 }

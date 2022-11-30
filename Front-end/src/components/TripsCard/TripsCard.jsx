@@ -9,6 +9,7 @@ function TripsCard(props) {
     <div className="tripContainer">
       <table className="tripTable">
         <tbody>
+          <TableElement element="Origin: " data={props.origin} />
           <TableElement element="Destination: " data={props.destination} />
           <TableElement element="Date: " data={props.date} />
           <TableElement element="Company: " data={props.company} />
