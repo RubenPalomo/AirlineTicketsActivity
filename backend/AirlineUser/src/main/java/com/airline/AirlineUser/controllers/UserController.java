@@ -28,8 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User findbyId(@PathVariable String id) {
-        return userService.findById(id).get();
+    public HttpResponse findbyId(@PathVariable String id) {
+        try {
+            return new HttpResponse(userService.findById(id).get().toString(), "User find", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "User doesn't exist", false);
+        }
     }
 
     @PostMapping()
@@ -38,20 +42,31 @@ public class UserController {
             findbyId(user.getDocument());
             return new HttpResponse("", "User already exists", false);
         } catch (Exception e) {
-            // TODO: handle exception
             userService.save(user);
-            return new HttpResponse("", "User correclty created", true);
+            return new HttpResponse("", "User correctly created", true);
         }
 
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable String id, @RequestBody User user) {
-        userService.save(user);
+    public HttpResponse update(@PathVariable String id, @RequestBody User user) {
+        try {
+            findbyId(id);
+            userService.save(user);
+            return new HttpResponse("", "User correctly updated", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "User doesn't exists", false);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable String id) {
-        userService.deleteById(id);
+    public HttpResponse deleteById(@PathVariable String id) {
+        try {
+            findbyId(id);
+            userService.deleteById(id);
+            return new HttpResponse("", "User correctly deleted", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "User doesn't exists", false);
+        }
     }
 }
