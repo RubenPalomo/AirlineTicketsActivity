@@ -42,7 +42,6 @@ public class UserController {
             findbyId(user.getDocument());
             return new HttpResponse("", "User already exists", false);
         } catch (Exception e) {
-            // TODO: handle exception
             userService.save(user);
             return new HttpResponse("", "User correctly created", true);
         }
