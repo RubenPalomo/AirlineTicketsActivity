@@ -28,9 +28,9 @@ public interface FlightsRepository extends MongoRepository<Flight, String> {
 
     // $cond: [$ne ['?3', null],luggages:'?3' , ]}
 
-    // @Query("{departure:'?0', destination:'?1', airline:'?2', luggages: { cond:
-    // {if: { $eq: ['?3', ''] }, then: {$exists: true}, else: '?3' } } }")
-    @Query("{departure:'?0', destination:'?1', airline:'?2', luggages:?3}")
+    // @Query("{departure:'?0', destination:'?1', airline:'?2', luggages: {cond:{if:
+    // { $eq: [ 3, 4] }, then: {$exists: true}, else: '?3' }} }")
+    @Query("{departure:'?0', destination:'?1', airline:'?2', luggages:'?3'}")
     List<Flight> getFlights(String departure, String destination, String airline, String luggages);
 
     public long count();
