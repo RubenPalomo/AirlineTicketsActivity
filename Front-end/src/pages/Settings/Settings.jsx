@@ -7,6 +7,7 @@ function Settings() {
       <Header />
       <div>
         <h1 className="title">Settings</h1>
+        <p>There's no settings yet, dude</p>
       </div>
     </div>
   );

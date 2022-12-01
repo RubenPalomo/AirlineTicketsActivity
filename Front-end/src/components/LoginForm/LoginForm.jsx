@@ -6,29 +6,18 @@ import "./LoginForm.scss";
 
 function LoginForm() {
   const [fieldsComplete, setfieldsComplete] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  const [fieldsIncorrect, setFieldsIncorrect] = useState(false);
   const navigate = useNavigate();
-  const baseURL = "http://localhost:8094/user";
+  const baseURL = "http://localhost:8094/user/";
 
-  async function tryLogin(user, password) {
+  function tryLogin(user, password) {
     let i = 0;
     var ok = false;
-    await axios.get(baseURL).then((response) => {
-      while (true) {
-        if (
-          response.data[i] != undefined &&
-          user == response.data[i].document &&
-          password == response.data[i].lastName
-        ) {
-          ok = true;
-          break;
-        }
-        if (response.data[i] == undefined) break;
-        i++;
-      }
+    axios.get(baseURL + user).then((response) => {
+      console.log(response.data);
+      if (response.data.success && response.data.data.includes(password))
+        navigate("/user", { replace: true });
     });
-
-    return ok;
   }
 
   async function handleSubmit(event) {
@@ -38,14 +27,12 @@ function LoginForm() {
 
     if (login == "" || password == "") {
       setfieldsComplete(true);
-      setIsLogged(false);
+      setFieldsIncorrect(false);
     } else {
       setfieldsComplete(false);
-      const isOK = tryLogin(login, password);
+      tryLogin(login, password);
       await new Promise((r) => setTimeout(r, 50));
-      console.log(isOK);
-      if (isOK) navigate("/user", { replace: true });
-      else setIsLogged(true);
+      setFieldsIncorrect(true);
     }
   }
 
@@ -60,7 +47,7 @@ function LoginForm() {
       <label className="invalid" hidden={!fieldsComplete}>
         (!) All the fields are requiered
       </label>
-      <label className="invalid" hidden={!isLogged}>
+      <label className="invalid" hidden={!fieldsIncorrect}>
         (!) User or password incorrect
       </label>
     </div>
