@@ -1,6 +1,5 @@
 package com.airline.AirlineFlight.controllers;
 
-import java.util.List;
 import java.sql.Date;
 import java.util.HashMap;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.airline.AirlineFlight.models.Flight;
+import com.airline.AirlineFlight.models.HttpResponse;
 import com.airline.AirlineFlight.service.FlightService;
 
 @RestController
@@ -27,17 +27,25 @@ public class FlightsController {
     private FlightService flightService;
 
     @GetMapping()
-    public List<Flight> getFlights() {
-        return flightService.findAll();
+    public HttpResponse getFlights() {
+        try {
+            return new HttpResponse(flightService.findAll().toString(), "Flights found", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "No flight exist", false);
+        }
     }
 
     @GetMapping("/{id}")
-    public Flight findbyId(@PathVariable String id) {
-        return flightService.findById(id);
+    public HttpResponse findbyId(@PathVariable String id) {
+        try {
+            return new HttpResponse(flightService.findById(id).toString(), "Flight found", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "Flight doesn't exist", false);
+        }
     }
 
     @GetMapping("/")
-    public List<Flight> findFlightsByParams(@RequestParam(required = false) String departure,
+    public HttpResponse findFlightsByParams(@RequestParam(required = false) String departure,
             @RequestParam(required = false) String destination,
             @RequestParam(required = false) String airline, @RequestParam(required = false) Integer layovers,
             @RequestParam(required = false) Date departureDate) {
@@ -59,26 +67,48 @@ public class FlightsController {
             map.put("departureDate", departureDate.toString());
         }
 
-        return flightService.findFlightsByParams(map);
+        String resultString = flightService.findFlightsByParams(map).toString();
+        try {
+            if (resultString == "") {
+                return new HttpResponse(resultString, "No flights finded", true);
+            } else {
+                return new HttpResponse(resultString, "Flights finded", true);
+            }
+        } catch (Exception e) {
+            return new HttpResponse("", "Research completed incorrectly", true);
+        }
     }
 
     @PostMapping()
-    public void save(@RequestBody Flight flight) {
+    public HttpResponse save(@RequestBody Flight flight) {
         try {
             findbyId(flight.getFlightId());
-            return;
+            return new HttpResponse("", "Flight already exists", false);
         } catch (Exception e) {
             flightService.save(flight);
+            return new HttpResponse("", "Flight correctly created", true);
         }
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable String id, @RequestBody Flight flight) {
-        flightService.save(flight);
+    public HttpResponse update(@PathVariable String id, @RequestBody Flight flight) {
+        try {
+            findbyId(id);
+            flightService.save(flight);
+            return new HttpResponse("", "Flight correctly updated", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "Flight doesn't exists", false);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable String id) {
-        flightService.deleteById(id);
+    public HttpResponse deleteById(@PathVariable String id) {
+        try {
+            findbyId(id);
+            flightService.deleteById(id);
+            return new HttpResponse("", "Flight correctly deleted", true);
+        } catch (Exception e) {
+            return new HttpResponse("", "Flight doesn't exists", false);
+        }
     }
 }
