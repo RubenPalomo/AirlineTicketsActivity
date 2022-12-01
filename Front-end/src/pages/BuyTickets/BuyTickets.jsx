@@ -1,72 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./../../components/Header/Header";
 import BuyForm from "./../../components/BuyForm/BuyForm";
 import TripObj from "./../../components/TripObject/Trip";
 import TicketsCard from "./../../components/TicketsCard/TicketsCard";
-import DBConnector from "./../../components/DBConnector/DBConnector";
 import "./BuyTickets.scss";
 
 function BuyTickets() {
   const baseURL = "http://localhost:8095/flight";
   const [trips, setTrips] = useState();
-  axios
-    .get(baseURL)
-    .then((response) => {
-      console.log(response);
-      setTrips(response.data);
-    })
-    .catch((e) => {
-      return e;
-    });
-  // const [trips, setTrips] = useState([
-  //   new TripObj("Madrid", "Rome", "05/29/2023", "Volvo", 0, false, 1000),
-  //   new TripObj("Rome", "Madrid", "12/15/2022", "Aeronapo", 2, true, 1000),
-  //   new TripObj("Madrid", "Murcia", "12/29/2022", "Tranvia", 1, true, 20),
-  // ]);
 
-  const arrayTrips = [
-    new TripObj("Madrid", "Rome", "05/29/2023", "Volvo", 0, false, 1000),
-    new TripObj("Rome", "Madrid", "12/15/2022", "Aeronapo", 2, true, 1000),
-    new TripObj("Madrid", "Murcia", "12/29/2022", "Tranvia", 1, true, 20),
-  ];
+  useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setTrips(response.data);
+    });
+  }, []);
+
+  const formatDate = (date) => {
+    console.log(date);
+    if (date == null) return "Unknown";
+    return date.toString().substring(0, 10);
+  };
 
   const setSearchParams = (field, params) => {
     let result;
     switch (field) {
       case "from":
-        result = arrayTrips.filter((element) =>
-          element.origin.includes(params)
-        );
+        result = trips.filter((element) => element.departure.includes(params));
         setTrips(result);
         break;
       case "to":
-        result = arrayTrips.filter((element) =>
+        result = trips.filter((element) =>
           element.destination.includes(params)
         );
         setTrips(result);
         break;
       case "company":
-        result = arrayTrips.filter((element) =>
-          element.company.toLowerCase().includes(params)
+        result = trips.filter((element) =>
+          element.airline.toLowerCase().includes(params)
         );
         setTrips(result);
         break;
       case "scales":
         switch (params) {
           case "zero":
-            result = arrayTrips.filter((element) => element.scales == 0);
+            result = trips.filter((element) => element.layovers == 0);
           case "one":
-            result = arrayTrips.filter((element) => element.scales <= 1);
+            result = trips.filter((element) => element.layovers <= 1);
             break;
           default:
-            result = arrayTrips;
+            result = trips;
             break;
         }
         break;
       case "date":
-        result = arrayTrips.filter(
-          (element) => params > new Date(element.date)
+        result = trips.filter(
+          (element) => params > new Date(element.departureDate)
         );
         setTrips(result);
         break;
@@ -87,12 +76,12 @@ function BuyTickets() {
       <div className="scrollTickets">
         {trips.map((element, index) => (
           <TicketsCard
-            key={index}
-            origin={element.airline}
+            key={element.flightId}
+            origin={element.departure}
             destination={element.destination}
-            date={element.date}
-            company={element.company}
-            scales={element.scales}
+            date={formatDate(element.departureDate)}
+            company={element.airline}
+            scales={element.layovers}
           />
         ))}
       </div>

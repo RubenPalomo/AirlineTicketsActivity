@@ -47,9 +47,9 @@ function BuyForm(props) {
           }}
         >
           <option value="">Select</option>
+          <option value="aireuropa">AirEuropa</option>
+          <option value="ryanair">RyanAir</option>
           <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
           <option value="audi">Audi</option>
         </select>
         <label for="scales"> company, making </label>

@@ -4,7 +4,7 @@ import TripsCard from "../../components/TripsCard/TripsCard";
 import TripObj from "./../../components/TripObject/Trip";
 import "./MyTrips.scss";
 
-function Home() {
+function MyTrips() {
   const trips = [
     new TripObj("Madrid", "Rome", "11/31/2022", "Airbus", 0, false, 1000),
     new TripObj("Rome", "Madrid", "12/15/2022", "Aeronapo", 1, true, 1000),
@@ -32,4 +32,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MyTrips;
