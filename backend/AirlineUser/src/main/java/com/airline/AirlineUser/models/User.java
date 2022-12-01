@@ -1,5 +1,6 @@
 package com.airline.AirlineUser.models;
 
+import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -81,8 +82,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [ document=" + document + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
-                + age
-                + ", password=" + password + ", nationality=" + nationality + "]";
+        JSONObject item = new JSONObject();
+
+        item.put("document", getDocument());
+        item.put("firstName", getFirstName());
+        item.put("lastName", getLastName());
+        item.put("age", getAge());
+        item.put("password", getPassword());
+        item.put("nationality", getNationality());
+
+        System.out.println(item.toString());
+
+        return item.toString();
+        // return "User [ document=" + document + ", firstName=" + firstName + ",
+        // lastName=" + lastName + ", age="
+        // + age
+        // + ", password=" + password + ", nationality=" + nationality + "]";
     }
 }

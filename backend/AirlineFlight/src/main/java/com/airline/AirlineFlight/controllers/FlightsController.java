@@ -73,7 +73,7 @@ public class FlightsController {
             if (resultString == "[]") {
                 return new HttpResponse(resultString, "No flights finded", true);
             } else {
-                return new HttpResponse(toJson(flightService.findFlightsByParams(map)), "Flights finded", true);
+                return new HttpResponse(resultString, "Flights finded", true);
             }
         } catch (Exception e) {
             return new HttpResponse("", "Research completed incorrectly", true);
@@ -111,30 +111,5 @@ public class FlightsController {
         } catch (Exception e) {
             return new HttpResponse("", "Flight doesn't exists", false);
         }
-    }
-
-    private String toJson(List<Flight> data) {
-
-        JSONArray array = new JSONArray();
-        JSONObject json = new JSONObject();
-
-        for (int i = 0; i < data.size(); i++) {
-
-            JSONObject item = new JSONObject();
-
-            item.put("id", data.get(i).getFlightId());
-            item.put("airline", data.get(i).getAirline());
-            item.put("departure", data.get(i).getDeparture());
-            item.put("departure", data.get(i).getDestination());
-            item.put("returnDate", data.get(i).getDepartureDate());
-            item.put("transiteMinutes", data.get(i).getTransiteMinutes());
-            item.put("layovers", data.get(i).getLayovers());
-            item.put("luggagesPrice", data.get(i).getLuggages());
-            item.put("price", data.get(i).getPrice());
-
-            array.put(item);
-            json.put("Flight " + i, array);
-        }
-        return json.toString();
     }
 }

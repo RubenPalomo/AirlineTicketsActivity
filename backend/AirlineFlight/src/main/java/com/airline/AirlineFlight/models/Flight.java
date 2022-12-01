@@ -122,8 +122,25 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight [flightId=" + flightId + ", departure=" + departure + ", destination=" + destination
-                + ", airline=" + airline + ", departureDate=" + departureDate + ", transiteMinutes=" + transiteMinutes
-                + ", layovers=" + layovers + ", luggages=" + luggages + ", price=" + price + "]";
+        JSONObject item = new JSONObject();
+
+        item.put("id", getFlightId());
+        item.put("airline", getAirline());
+        item.put("departure", getDeparture());
+        item.put("departure", getDestination());
+        item.put("returnDate", getDepartureDate());
+        item.put("transiteMinutes", getTransiteMinutes());
+        item.put("layovers", getLayovers());
+        item.put("luggagesPrice", getLuggages());
+        item.put("price", getPrice());
+
+        return item.toString();
+
+        // return "Flight [flightId=" + flightId + ", departure=" + departure + ",
+        // destination=" + destination
+        // + ", airline=" + airline + ", departureDate=" + departureDate + ",
+        // transiteMinutes=" + transiteMinutes
+        // + ", layovers=" + layovers + ", luggages=" + luggages + ", price=" + price +
+        // "]";
     }
 }
