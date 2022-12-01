@@ -2,6 +2,8 @@ package com.airline.AirlineFlight.models;
 
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -51,7 +53,7 @@ public class Flight {
     }
 
     public void setFlightId(String flightId) {
-        this.flightId = flightId;
+        this.flightId = flightId.toLowerCase();
     }
 
     public String getDeparture() {
@@ -59,7 +61,7 @@ public class Flight {
     }
 
     public void setDeparture(String departure) {
-        this.departure = departure;
+        this.departure = departure.toLowerCase();
     }
 
     public String getDestination() {
@@ -67,7 +69,7 @@ public class Flight {
     }
 
     public void setDestination(String destination) {
-        this.destination = destination;
+        this.destination = destination.toLowerCase();
     }
 
     public String getAirline() {
@@ -75,7 +77,7 @@ public class Flight {
     }
 
     public void setAirline(String airline) {
-        this.airline = airline;
+        this.airline = airline.toLowerCase();
     }
 
     public Date getDepartureDate() {

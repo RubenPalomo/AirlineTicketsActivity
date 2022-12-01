@@ -2,6 +2,8 @@ package com.airline.AirlineUser.controllers;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +36,7 @@ public class UserController {
     @GetMapping("/{id}")
     public HttpResponse findbyId(@PathVariable String id) {
         try {
-            return new HttpResponse(userService.findById(id).get().toString(), "User found", true);
+            return new HttpResponse(toJson(userService.findById(id).get()), "User found", true);
         } catch (Exception e) {
             return new HttpResponse("", "User doesn't exist", false);
         }
@@ -72,5 +74,20 @@ public class UserController {
         } catch (Exception e) {
             return new HttpResponse("", "User doesn't exists", false);
         }
+    }
+
+    private String toJson(User data) {
+
+        // JSONArray array = new JSONArray();
+        JSONObject item = new JSONObject();
+
+        item.put("document", data.getDocument());
+        item.put("firstName", data.getFirstName());
+        item.put("lastName", data.getLastName());
+        item.put("age", data.getAge());
+        item.put("password", data.getPassword());
+        item.put("nationality", data.getNationality());
+
+        return item.toString();
     }
 }
