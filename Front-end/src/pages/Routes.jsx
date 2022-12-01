@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, useRoutes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import Home from "./Home/Home";
 import User from "./User/User";
@@ -9,40 +9,17 @@ import Settings from "./Settings/Settings";
 import NotFound from "./NotFound/NotFound";
 
 function Body() {
-  const App = () => {
-    let routes = useRoutes([
-      { path: "/", element: <Login /> },
-      { path: "/login", element: <Login /> },
-      {
-        path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/user",
-        element: <User />,
-      },
-      {
-        path: "/trips",
-        element: <MyTrips />,
-      },
-      {
-        path: "/tickets",
-        element: <BuyTickets />,
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-      { path: "*", element: <NotFound /> },
-    ]);
-
-    return routes;
-  };
-
   return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/home" element={<Home />}></Route>
+      <Route path="/user" element={<User />}></Route>
+      <Route path="/trips" element={<MyTrips />}></Route>
+      <Route path="/tickets" element={<BuyTickets />}></Route>
+      <Route path="/settings" element={<Settings />}></Route>
+      <Route path="*" element={<NotFound />}></Route>
+    </Routes>
   );
 }
 

@@ -2,7 +2,6 @@ import React from "react";
 import "./Login.scss";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import logo from "./../../assets/logo.png";
-import Header from "./../../components/Header/Header";
 
 function Login() {
   return (

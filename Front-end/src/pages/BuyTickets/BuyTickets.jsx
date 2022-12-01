@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./../../components/Header/Header";
 import BuyForm from "./../../components/BuyForm/BuyForm";
-import TripObj from "./../../components/TripObject/Trip";
+// import TripObj from "./../../components/TripObject/Trip";
 import TicketsCard from "./../../components/TicketsCard/TicketsCard";
 import "./BuyTickets.scss";
 
@@ -17,49 +17,14 @@ function BuyTickets() {
   }, []);
 
   const formatDate = (date) => {
-    console.log(date);
     if (date == null) return "Unknown";
     return date.toString().substring(0, 10);
   };
-
-  const setSearchParams = (field, params) => {
-    let result;
-    switch (field) {
-      case "from":
-        result = trips.filter((element) => element.departure.includes(params));
-        setTrips(result);
-        break;
-      case "to":
-        result = trips.filter((element) =>
-          element.destination.includes(params)
-        );
-        setTrips(result);
-        break;
-      case "company":
-        result = trips.filter((element) =>
-          element.airline.toLowerCase().includes(params)
-        );
-        setTrips(result);
-        break;
-      case "scales":
-        switch (params) {
-          case "zero":
-            result = trips.filter((element) => element.layovers == 0);
-          case "one":
-            result = trips.filter((element) => element.layovers <= 1);
-            break;
-          default:
-            result = trips;
-            break;
-        }
-        break;
-      case "date":
-        result = trips.filter(
-          (element) => params > new Date(element.departureDate)
-        );
-        setTrips(result);
-        break;
-    }
+  const refresh = (url) => {
+    axios.get(url).then((response) => {
+      console.log(response);
+      setTrips(response.data);
+    });
   };
 
   if (trips == undefined) return;
@@ -71,7 +36,7 @@ function BuyTickets() {
         <h1 className="title">Buy Tickets</h1>
       </div>
       <div>
-        <BuyForm setSearchParams={setSearchParams} />
+        <BuyForm refresh={refresh} />
       </div>
       <div className="scrollTickets">
         {trips.map((element, index) => (
