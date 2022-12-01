@@ -2,10 +2,7 @@ package com.airline.AirlineFlight.controllers;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

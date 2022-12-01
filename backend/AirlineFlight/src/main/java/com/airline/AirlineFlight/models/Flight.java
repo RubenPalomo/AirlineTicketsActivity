@@ -2,7 +2,6 @@ package com.airline.AirlineFlight.models;
 
 import java.util.Date;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -135,12 +134,5 @@ public class Flight {
         item.put("price", getPrice());
 
         return item.toString();
-
-        // return "Flight [flightId=" + flightId + ", departure=" + departure + ",
-        // destination=" + destination
-        // + ", airline=" + airline + ", departureDate=" + departureDate + ",
-        // transiteMinutes=" + transiteMinutes
-        // + ", layovers=" + layovers + ", luggages=" + luggages + ", price=" + price +
-        // "]";
     }
 }

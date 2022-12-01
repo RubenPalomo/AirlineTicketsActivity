@@ -91,12 +91,6 @@ public class User {
         item.put("password", getPassword());
         item.put("nationality", getNationality());
 
-        System.out.println(item.toString());
-
         return item.toString();
-        // return "User [ document=" + document + ", firstName=" + firstName + ",
-        // lastName=" + lastName + ", age="
-        // + age
-        // + ", password=" + password + ", nationality=" + nationality + "]";
     }
 }
