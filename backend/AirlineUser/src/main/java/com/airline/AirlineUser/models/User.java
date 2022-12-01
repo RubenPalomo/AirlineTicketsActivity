@@ -81,7 +81,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [document=" + document + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+        return "User [ document=" + document + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
+                + age
                 + ", password=" + password + ", nationality=" + nationality + "]";
     }
 }
