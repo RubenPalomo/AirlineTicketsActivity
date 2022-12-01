@@ -25,18 +25,14 @@ public class UserController {
     private UserService userService;
 
     @GetMapping()
-    public HttpResponse getUsers() {
-        try {
-            return new HttpResponse(userService.findAll().toString(), "Users found", true);
-        } catch (Exception e) {
-            return new HttpResponse("", "No user exist", false);
-        }
+    public List<User> getUsers() {
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
     public HttpResponse findbyId(@PathVariable String id) {
         try {
-            return new HttpResponse(userService.findById(id).get().toString(), "User found", true);
+            return new HttpResponse(userService.findById(id).get().toString(), "User find", true);
         } catch (Exception e) {
             return new HttpResponse("", "User doesn't exist", false);
         }

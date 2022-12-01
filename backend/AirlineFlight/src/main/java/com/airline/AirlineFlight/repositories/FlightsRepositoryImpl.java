@@ -33,6 +33,7 @@ public class FlightsRepositoryImpl implements FlightsRepository {
 
     @Override
     public List<Flight> findAll() {
+
         return mongoTemplate.findAll(Flight.class);
     }
 
