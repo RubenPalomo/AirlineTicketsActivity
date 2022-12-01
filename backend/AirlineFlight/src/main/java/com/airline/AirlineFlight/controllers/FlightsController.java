@@ -1,7 +1,8 @@
 package com.airline.AirlineFlight.controllers;
 
 import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.airline.AirlineFlight.models.Flight;
 import com.airline.AirlineFlight.service.FlightService;
-import com.fasterxml.jackson.annotation.OptBoolean;
 
 @RestController
 @RequestMapping("/flight")
@@ -33,41 +33,33 @@ public class FlightsController {
 
     @GetMapping("/{id}")
     public Flight findbyId(@PathVariable String id) {
-        return flightService.findById(id).get();
+        return flightService.findById(id);
     }
 
-    // @GetMapping("/departure:{departure}")
-    // public List<Flight> findFlightByDeparture(@PathVariable String departure) {
-    // return flightService.findFlightByDeparture(departure);
-    // }
-
-    // @GetMapping("/luggages:{hasLuggages}")
-    // public List<Flight> findFlightHasLuggages(@PathVariable String hasLuggages) {
-    // return flightService.findFlightHasLuggages(hasLuggages);
-    // }
-
-    // @GetMapping("/airline:{airline}")
-    // public List<Flight> findFlightByAirLine(@PathVariable String airline) {
-    // return flightService.findFlightByAirLine(airline);
-    // }
-
-    // @GetMapping("/layovers:{layovers}")
-    // public List<Flight> findFlightByLayovers(@PathVariable int layovers) {
-    // return flightService.findFlightByLayovers((layovers));
-    // }
-
     @GetMapping("/")
-    public List<Flight> getFlights(@RequestParam Optional<String> departure, @RequestParam Optional<String> destination,
-            @RequestParam Optional<String> airline, @RequestParam Optional<String> layovers,
-            @RequestParam Optional<String> luggages) {
-        // return flightService.getFlights(departure.orElse("%"),
-        // destination.orElse("%"), airline.orElse("%"),
-        // Integer.parseInt(layovers.orElse("100")), luggages.orElse("%"));
+    public List<Flight> findFlightsByParams(@RequestParam(required = false) String departure,
+            @RequestParam(required = false) String destination,
+            @RequestParam(required = false) String airline, @RequestParam(required = false) Integer layovers,
+            @RequestParam(required = false) Date departureDate) {
 
-        System.out.println(luggages.orElse(null));
+        HashMap<String, String> map = new HashMap<String, String>();
+        if (departure != null) {
+            map.put("departure", departure);
+        }
+        if (destination != null) {
+            map.put("destination", destination);
+        }
+        if (airline != null) {
+            map.put("airline", airline);
+        }
+        if (layovers != null) {
+            map.put("layovers", layovers.toString());
+        }
+        if (departureDate != null) {
+            map.put("departureDate", departureDate.toString());
+        }
 
-        return flightService.getFlights(departure.orElse("/.*/"), destination.orElse("/.*/"), airline.orElse("/"),
-                luggages.orElse("{$exists: true}"));
+        return flightService.findFlightsByParams(map);
     }
 
     @PostMapping()
